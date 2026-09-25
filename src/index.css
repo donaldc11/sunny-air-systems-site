@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #060605;
+  --panel: #0d0d0b;
+  --ink: #e8e6e0;
+  --muted: #8a877e;
+  --amber: #f5a524;
+  --hairline: rgba(232, 230, 224, 0.12);
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); }
+
+.ghost {
+  position: absolute;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  line-height: 0.85;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(245, 165, 36, 0.09);
+  pointer-events: none;
+  user-select: none;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.in { opacity: 1; transform: none; }
+
+.pill {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--amber);
+  border: 1px solid rgba(245, 165, 36, 0.4);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.spec-row {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: 1.25rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--hairline);
+}
+.spec-row:last-child { border-bottom: 1px solid var(--hairline); }
+.spec-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+  padding-top: 0.2rem;
+}
+
+.lane {
+  border: 1px solid var(--hairline);
+  background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0));
+  transition: border-color 0.4s ease, transform 0.4s ease;
+}
+.lane:hover { border-color: rgba(245, 165, 36, 0.45); transform: translateY(-4px); }
+
+.ember {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  pointer-events: none;
+}
+
+@keyframes sweep { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.radar-sweep { animation: sweep 7s linear infinite; transform-origin: center; }
+
+@media (max-width: 640px) {
+  .spec-row { grid-template-columns: 1fr; gap: 0.35rem; }
+}
